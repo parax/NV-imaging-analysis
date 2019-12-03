@@ -1,0 +1,185 @@
+// ======================= RECONSTRUCTION OPTIONS =======================
+// Options for reconstruction of magnetic fields and addition propagation
+{
+  // path of the data that has already been processed with the widefield processor
+  "base_dir": "/Users/david/Dropbox/Research/2019/FFT_propagation/Experimental data/graphene_ribbon/current_on/",
+  "filepath": "ODMR - Pulsed_processed_bin_4",
+  "filepath_ref": "/Users/david/Dropbox/Research/2019/FFT_propagation/Experimental data/graphene_ribbon/current_off/ODMR - Pulsed_processed_bin_4/bxyz_bin_4/data",
+  "subtract_ref": false,
+
+  // Number of addition binning to be performed. num_bins = 0 does nothing.
+  "num_bins": 0,
+  // fitting the pixel with the hamiltonian
+  "fit_pixels": true,
+  // reloads the previous hamiltonian fitting, USees you current parameters to pick what files to read
+  "recon_reload": true,
+
+  // ======================= bxyz propagation =======================
+  "bxyz_propagation": false,
+  "bxyz_prop_bnv_axis": 0,
+
+  // ======================= magnetisation propagation =======================
+  "magnetisation_propagation": false,
+  "mag_b_type": "bnv",
+  "mag_bnv_axis": 0,
+  "mag_axis": "m_z",
+  // If the magnetisation is in plane rather than z
+  "in_plane_propagation": true,
+  "in_plane_angle": 0, // estimate of direction of the magnetisation in the plane
+
+  // ===== current propagation ======
+  "current_propagation": true,
+  "curr_use_bxyz_prop": true, // make sure you enable bxyz_propagation for this to work
+  "curr_b_type": "bz",
+  "curr_use_vector": true, // Use all three bx, by, bz for the current reconstruction
+  "curr_ignore_axis": "",
+
+  // ====== Region of interest params ======
+  // For taking a new region of interest for the reconstruction
+  "ROI": "Full", // option: Full, Rectangle, Square, Circle
+  "ROI_radius": 60,
+  "ROI_centre":  [280, 250], // [280, 250], [300, 340],
+  "ROI_rect_size": [150, 230], // Used for the rectangle size only  [150, 230], [90, 100],
+  // Defines how the ROI is used. false = the region of interest is only used for plotting.
+  // true = region of interest is used for all fitting and plotting
+  "use_ROI_for_fit": false,
+
+  // ====== Magnetic field parameters ======
+  "auto_read_b": false, // Gets the background magnetic field from the metadata file
+  "b_mag": 60, // Magnitude of the background applied magnetic field
+  "b_theta": 0, // Angle of the magnetic field taken from the z-axis
+  "b_phi": -160, // angle of the magnetic field around the xy-plane
+  // The code takes the above values and calculates the unv that is expected in the correct order.
+  //  If you have the unv but not the background parameters use_nv and define below.
+  "use_unv": true,
+  "unv": [
+    [0, -0.81649, 0.57735],
+    [0.81649, 0, 0.57735],
+    [-0.81649, 0, 0.57735],
+    [0, -0.81649, -0.57735]
+  ],
+
+  // ====== reconstruction parameters ======
+  "recon_method": "bxyz",
+  "diamond_type": "CVD",
+  // line cute position and thickness to average over
+  "plot_line_cuts": false, // whether or not the line cut data is plotted
+  "linecut_hor_pos": 180,
+  "linecut_ver_pos": 50,
+  "linecut_thickness": 5,
+
+  // ====== Magnetic field guesses ======
+  // Magnetic field is fitted in units of Gauss (G)
+  "auto_b_guess": true, // uses the background field values from Magnetic field parameters ^^
+  "bx_guess": 10,
+  "bx_range": 10,
+  "by_guess": -27,
+  "by_range": 10,
+  "bz_guess": 32,
+  "bz_range": 10,
+  // ====== Zero field splitting guess ======
+  // The zero field splitting is defined in units of MHz
+  "constant_d": false, // keeps d constant for e-field and stress reconstruction
+  "d_guess": 2871,
+  "d_range": 1,
+  // ====== Electric field fitting guesses ======
+  // Electric field is fitted in units of kV/cm
+  "ez_guess": -7e5,
+  "ez_range": -3e5,
+  // ====== Stress fitting guesses ======
+  "sigma_axial_guess": 0,
+  "sigma_axial_range": 5e4,
+  "sigma_xy_guess": 0,
+  "sigma_xy_range": 5e4,
+  "sigma_xz_guess": 0,
+  "sigma_xz_range": 5e4,
+  "sigma_yz_guess": 0,
+  "sigma_yz_range": 5e4,
+
+  // ======================================================================
+  // ===================== Propagator Parameters ==========================
+  // ======================================================================
+
+  // subtract teh background of the b_map before passing to propagation
+  "subtract_b_background": true,
+  // Type of background subtraction should be performed
+  "subtract_b_background_model": "mean", // mean, poly, gaussian
+  // Threshold for dynamically removing elements from the image for the background subtraction
+  // upper threshold, values over this will be ignored in the background fit
+  "use_upper_threshold": false,
+  "upper_threshold": 40,
+  // lower threshold, values less than this will be ignored in the background fit
+  "use_lower_threshold": false,
+  "lower_threshold": -40,
+  "poly_order": 1, // order of the polynomial from 1 to 5 
+  "sub_back_multiple_times": 1, // how many times the background is subtracted
+
+  // Plot the fft transformations
+  "plot_fft_stages": false,
+
+  // Use the standoff in the transformation array
+  "use_stand_off": true,
+  "stand_off": 300e-9, // distance between NV layer and sample in meters
+  // Use padding function (WARNING there is an issue to transposing the data set that needs to be fixed)
+  "fft_padding": true,
+  "plot_padded_image": false,
+  "padding_factor": 2,
+  // mode of padding, check numpy.pad documentation for details
+  // {constant, edge, linear_ramp, mean, median, minimum, reflect, symmetric, wrap, empty}
+  "padding_mode": "constant",
+  // add an epsilon value to the k-vectors to avoid some issues with 1/0
+  "use_k_vector_epsilon": false,
+  "k_vector_epsilon": 1e-6,
+  // Use a hanning filter in the fourier space with high and low cutoffs.
+  "hanning_filter": true,
+   "use_hanning_high_cutoff": true,
+  "lambda_high_cutoff": 0.1e-6,
+  "use_hanning_low_cutoff": false,
+  "lambda_low_cutoff": 500e-6,
+
+  // ======================================================================
+  // =================== Scipy least mean square params ===================
+  // ======================================================================
+
+
+    // Method for scipy least means square,
+    // lm (fast but doesn't use bounds),
+    // trf (uses bounds and the most reliable fit method but can be very slow)
+    // dogbox (uses bounds and is faster than trf)
+    "fit_method": "lm",
+    "show_progressbar": true, // display progress bar during fitting
+    // uses an analytically determined Jacobian, This should be faster but might not work
+    // for every function
+    "use_analytic_jac": false,
+    // verbose fitting 0 = silent, 1 = term report, 2 display iterations
+    "verbose_fitting": 0, // {0, 1, 2},
+    // The scheme ‘3-point’ is more accurate, but requires twice as many operations as ‘2-point’ (default).
+    // The scheme ‘cs’ uses complex steps, and while potentially the most accurate, it is
+    // applicable only when fun correctly handles complex inputs and can be analytically
+    // continued to the complex plane.
+    "fit_jac_acc": "2-point", // {‘2-point’, ‘3-point’, ‘cs’}
+    // Tolerance settings, the exact condition depends on a method used get scipy documentation
+    // Tolerance for termination by the change of the independent variables.
+    "fit_gtol": 1e-8, // Default is 1e-8.
+    // Tolerance for termination by the norm of the gradient.
+    "fit_xtol": 1e-8, // Default is 1e-8.
+    // Tolerance for termination by the change of the cost function.
+    "fit_ftol": 1e-8, // Default is 1e-8.
+    // Rescales the x by the units of the jacobian (doesn't seem to make a difference)
+    "scale_x": true,
+    // Determines the loss function. This in non trival check the scipy documnetation
+    "loss_fn": "linear", // {linear, soft_l1, huber, cauchy, arctan}
+    // jacobian has NOT been set up for recon
+    "override_analytic_jac": true,
+
+
+  // === Plotting parameters ===
+  "make_plots": true,
+  "save_plots": true,
+  "show_plots": true,
+  "plot_previous_data": false,
+  "annotate_plots": true,
+  "raw_pixel_size": 0.062,
+  "dpi": 600,
+  "save_fig_type": "png"
+}

@@ -1,0 +1,10 @@
+// === Plotting options for magnetisation  ===
+{
+  "cbar_title": "Electric field, E (V/cm)",
+  "sub_back": false,
+  "sub_back_type": "mean",
+  "colour_map": "Greys",
+  "auto_range": true,
+  "c_range": [-1,1],
+  "symmetric_axis": false
+}

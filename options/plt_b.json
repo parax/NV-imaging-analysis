@@ -1,0 +1,31 @@
+// === Plotting options for magnetisation  ===
+{
+  "paper_figure": false,
+  "cbar_title": "Magnetic field, B (G)",
+  // Background subtraction that is only applied for the plotting
+  "sub_back": false,
+  // Type of background subtraction should be performed
+  "sub_back_type": "mean", // mean, poly, gaussian
+  "poly_order": 1, // order of the polynomial from 1 to 5
+  "sub_back_multiple_times": 1, // how many times the background is subtracted
+    // apply a filter to the plotted image
+  "filter_image": false,
+  // the type of filter to apply check scikit-image documentation. Each option needs to be hardcoded though
+  "filter_type": "gaussian", // {gaussian }
+  // Sigma size for the gaussian filter, should probably be around 1.
+  "filter_sigma": 1.2,
+  // Threshold for dynamically removing elements from the image for the background subtraction
+  // upper threshold, values over this will be ignored in the background fit
+  "use_upper_threshold": false,
+  "upper_threshold": [40, 20, 10, 5],
+  // lower threshold, values less than this will be ignored in the background fit
+  "use_lower_threshold": false,
+  "lower_threshold": [-40, -30, -20, -10],
+  // colourmap used for plotting from the matplotlib library
+  "colour_map": "bwr",
+   // Defines if an auto range for the colour axis is used or not
+  "auto_range": false,
+  "c_range": [-2,2],
+  // Define the colour axis range bases [- max_value, max_value]. Only works if auto_range is false
+  "symmetric_axis": false
+}

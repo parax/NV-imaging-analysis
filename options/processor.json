@@ -1,0 +1,99 @@
+{
+    //  ========== General Parameters ==========
+    // path of the raw bin data
+    "base_dir": "/Users/david/Dropbox/Research/2019/VI3_flakes/2019-10-07_Diamond 351 with VI3/",
+    "filepath": "ODMR - Pulsed_76",
+    "ignore_ref": false, // if true the reference measurement is ignored
+    "num_bins": 2, // Number of addition binning to be performed. num_bins = 0 does nothing.
+
+    // ====== Region of interest params ======
+    // For taking a region of interest and ignoring the rest of the data set
+    "ROI": "Full", // option: Full, Rectangle, Square, Circle
+    "ROI_radius": 200, // radius of circle or half the size of the Square
+    "ROI_centre": [256, 256], // centre pixel
+    "ROI_rect_size": [100, 50], // Used for the rectangle size only
+    // Defines how the ROI is used. false = the region of interest is only used for plotting.
+    // true = region of interest is used for all fitting and plotting
+    "use_ROI_for_fit": true,
+
+    // Removes data points from the start and end of each pixel data
+    "remove_start_sweep": 1,
+    "remove_end_sweep": 0,
+
+    // Style of the reference normalisation used. div = division and sub = subtraction
+    "normalisation": "div",
+
+    // ========== Regions for spectra comparision  ==========
+    "single_pixel_check": [200, 100], // single pixel location that is used
+    "area_1_centre": [200, 100], // centre pixel of area 1
+    "area_1_size": 10, // size of the square region of area 1
+    "area_2_centre": [100, 200],
+    "area_2_size": 10,
+
+    // ========== Fitting Parameters ==========
+    "fit_pixels": true, // true fits all of the required pixels, false ignores the pixel fitting
+    "num_peaks": 2, // number of ODMR peaks/dips
+    // Lineshape used for the fit, model options: lorentzian, more to come
+    "lineshape": "lorentzian",
+
+    // All parameters can either have a range or a bound.
+    // The code automatically detects this by the name of the dictionary key.
+    // range results in bounds of min = guess - range, max = guess + range
+    // bounds directly gives these values
+
+    // Position guess for the peaks
+    "pos_guess": [2743, 3010, 2848, 2865, 2889,  2906, 2947, 2983],
+    "pos_range": 40,
+
+    // Amplitude of the peak
+    "amp_guess": -0.015,
+    "amp_bounds": [-0.05, -0.001],
+
+    // Full width half maximum of the peaks
+    "fwhm_guess": 10,
+    "fwhm_bounds": [5, 30],
+
+    // ======= Background Function ======
+    "bg_function" : "linear",
+    "bg_parameter_guess" : [1, 0],
+    "bg_parameter_bounds" : [[-100,100], [-5,5]],
+
+
+    // ========== scipy least means square options ===========
+    // Method for scipy least means square,
+    // lm (fast but doesn't use bounds),
+    // trf (uses bounds and the most reliable fit method but can be very slow)
+    // dogbox (uses bounds and is faster than trf)
+    "fit_method": "dogbox",
+    "show_progressbar": true, // display progress bar during fitting
+    // uses an analytically determined Jacobian, This should be faster but might not work
+    // for every function
+    "use_analytic_jac": false,
+    // verbose fitting 0 = silent, 1 = term report, 2 display iterations
+    "verbose_fitting": 0, // {0, 1, 2},
+    // The scheme ‘3-point’ is more accurate, but requires twice as many operations as ‘2-point’ (default).
+    // The scheme ‘cs’ uses complex steps, and while potentially the most accurate, it is
+    // applicable only when fun correctly handles complex inputs and can be analytically
+    // continued to the complex plane.
+    "fit_jac_acc": "2-point", // {‘2-point’, ‘3-point’, ‘cs’}
+    // Tolerance settings, the exact condition depends on a method used get scipy documentation
+    // Tolerance for termination by the change of the independent variables.
+    "fit_gtol": 1e-10, // Default is 1e-8.
+    // Tolerance for termination by the norm of the gradient.
+    "fit_xtol": 1e-10, // Default is 1e-8.
+    // Tolerance for termination by the change of the cost function.
+    "fit_ftol": 1e-10, // Default is 1e-8.
+    // Rescales the x by the units of the jacobian (doesn't seem to make a difference)
+    "scale_x": true,
+    // Determines the loss function. This in non trival check the scipy documnetation
+    "loss_fn": "linear", // {linear, soft_l1, huber, cauchy, arctan}
+
+        "_3": " ========== Plotting Parameters ========== ",
+    "make_plots": true,
+    "save_plots": true,
+    "show_plots": true,
+    "annotate_plots": true,
+    "raw_pixel_size": 0.108,
+    "dpi": 600,
+    "save_fig_type": "png"
+}

@@ -1,0 +1,42 @@
+// Default plotting options
+// These are the default settings that should not be changed.
+// Override these options with the relavant option set for the plotted data
+{
+  // Determines if the plots are made to begin with
+  "make_plots": true,
+  // Determines if the figures are saved
+  "save_figure": true,
+  // Determines if the figures are shown at the end of the run
+  "show_plots": true,
+  // if true and a ROI is used or area plots are used the areas are plotted on the PL image
+  "annotate_plots": true,
+  "raw_pixel_size": 0.062, // size of the raw pixels in microns
+  "dpi": 600, // dpi of the saved figure, only used for rasterised images
+  "save_fig_type": "png", // format for saving the figures
+
+  // Background subtraction that is only applied for the plotting
+  "sub_back": false,
+  // Type of background subtraction should be performed
+  "sub_back_type": "mean",
+  "poly_order": 5, // order of the polynomial from 1 to 5
+  "sub_back_multiple_times": 1, // how many times the background is subtracted
+    // apply a filter to the plotted image
+  "filter_image": false,
+  // the type of filter to apply check scikit-image documentation. Each option needs to be hardcoded though
+  "filter_type": "gaussian", // {gaussian }
+  // Sigma size for the gaussian filter
+  "filter_sigma": 1.2,
+  // Threshold for dynamically removing elements from the imgage for the background subtraction
+  "use_upper_threshold": false,
+  "lower_threshold": [40, 30, 20, 10], // upper threshold, values over this will be ignored in the background fit
+  "use_lower_threshold": false,
+  "lower_threshold": [-40, -30, -20, -10], // lower threshold, values less than this will be ignored in the background fit
+
+  // colourmap used for plotting from the matplotlib library
+  "colour_map": "Greys_r",
+  // Defines if an auto range for the colour axis is used or not
+  "auto_range": false,
+  "c_range": [-6,6],
+  // Define the colour axis range bases [- max_value, max_value]. Only works if auto_range is false
+  "symmetric_axis": false
+}

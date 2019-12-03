@@ -1,0 +1,9 @@
+// === Plotting options for magnetisation  ===
+{
+  "sub_back": false,
+  "sub_back_type": "poly",
+  "colour_map": "bone_r",
+  "auto_range": false,
+  "c_range": [0,250],
+  "symmetric_axis": false
+}
