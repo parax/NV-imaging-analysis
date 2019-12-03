@@ -1,0 +1,68 @@
+{
+    "_1": " ========== General Parameters ========== ",
+    "filepath": "../test_data/Low_field_ODMR",
+    "ignore_ref": false,
+
+    "num_bins": 8   ,
+    "ROI": "Full",
+    "ROI_square": [2, 4],
+    "ROI_radius": 25,
+    "ROI_centre": [50, 50],
+    "use_ROI_for_fit": true,
+    "remove_start_sweep": 3,
+    "remove_end_sweep": 1,
+
+    "normalisation": "div",
+
+    "_2": " ========== Regions for spectra comparision  ========== ",
+    "single_pixel_check": [20, 10],
+    "area_1_centre": [50, 50],
+    "area_1_size": 10,
+    "area_2_centre": [80, 80],
+    "area_2_size": 10,
+
+    "_3": " ========== Plotting Parameters ========== ",
+    "make_plots": true,
+    "save_plots": true,
+    "show_plots": true,
+    "annotate_plots": true,
+    "raw_pixel_size": 0.108,
+    "dpi": 600,
+    "save_fig_type": "png",
+
+    "_4": " ========== Fitting Parameters ========== ",
+    "fit_pixels": false,
+    "num_peaks": 2,
+    "lineshape": "lorentzian",
+    "fit_method": "trf",
+    "use_analytic_jac": false,
+
+    "pos_guess": [2871, 2885],
+    "pos_range": 40,
+
+    "_5": " [min, guess, max] ",
+    "amp_guess": -0.01,
+    "amp_bounds": [-1.5, 0],
+
+    "fwhm_guess": 15,
+    "fwhm_bounds": [0.1, 45],
+
+    "bg_offset_guess": 1,
+    "bg_offset_bounds": [0.5, 1.5],
+    "bg_grad_guess": 0,
+    "bg_grad_bounds": [-10, 10],
+
+    "show_progressbar": true,
+    "verbose_fitting": 0,
+    "fit_jac_acc": "2-point",
+    "fit_gtol": 1e-8,
+    "fit_xtol": 1e-8,
+    "fit_ftol": 1e-8,
+    "scale_x": false,
+    "loss_fn": "linear",
+
+    "_6" : "====WIP==== Background Function ====WIP==",
+    "bg_function" : "linear",
+    "bg_parameter_guess" : [1, 0.0],
+    "bg_parameter_bounds" : [[-100,100], [-5,5]]
+}

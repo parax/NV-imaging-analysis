@@ -1,0 +1,95 @@
+{
+    //  ========== General Parameters ==========
+    "total_bin": 1,
+    "output_dir": "/Users/david/Dropbox/Research/2019/FFT_propagation/Magnetic_flake_simulations",
+    "data_dir": "/Users/david/Dropbox/Research/2019/FFT_propagation/Magnetic_flake_simulations/data",
+
+    // ======================================================================
+    // ================== flake simulation parameters =======================
+    // ======================================================================
+    "sim_size_factor": 3, // size of image multiplied by the flake size
+    "sim_number_points": 400, // number of pixels inside of the flake
+    // ========== flake dimensions ==========
+    "magnetisation_mag": 0.8e5, // 1.48e5, // In units of A/m
+    "magnetisation_angle": 0, // Angle of the magnetisation for in plane mag
+    "mag_z": false, // true makes the magnetisation in the z-direction and ignores in-plane
+    "flake_width_x": 5e-6,
+    "flake_width_y": 5e-6,
+    "flake_stand_off": 50e-9,
+    "flake_thickness": 3e-9,
+    // ========== image modification Parameters ==========
+    "filter": true, // Apply a gaussian filter with a FWHM of sigma
+    "sigma": 8, // FHWM of the gaussian filter
+    "rebin": true, // Rebin the image
+    "num_bins": 2, // size of the rebinning
+    // ========== Noise Parameters ==========
+    "add_noise": true,
+    "noise_percentage": 10,
+
+  // ======================================================================
+  // ===================== Simulation Parameters ==========================
+  // ======================================================================
+    "use_prop_bxyz": false,
+
+
+  // ======================================================================
+  // ===================== Propagator Parameters ==========================
+  // ======================================================================
+
+  // subtract teh background of the b_map before passing to propagation
+  "subtract_b_background": false,
+  // Type of background subtraction should be performed
+  "subtract_b_background_model": "mean", // mean, poly, gaussian
+  // Threshold for dynamically removing elements from the image for the background subtraction
+  // upper threshold, values over this will be ignored in the background fit
+  "use_upper_threshold": false,
+  "upper_threshold": 40,
+  // lower threshold, values less than this will be ignored in the background fit
+  "use_lower_threshold": false,
+  "lower_threshold": -40,
+
+  // Plot the fft transformations
+  "plot_fft_stages": false,
+
+  // Use the standoff in the transformation array
+  "use_stand_off": false,
+  "stand_off": 50e-9, // distance between NV layer and sample in meters
+  // Use padding function (WARNING there is an issue to transposing the data set that needs to be fixed)
+  "fft_padding": false,
+  "plot_padded_image": false,
+  "padding_factor": 4,
+  // mode of padding, check numpy.pad documentation for details
+  // {constant, edge, linear_ramp, mean, median, minimum, reflect, symmetric, wrap, empty}
+  "padding_mode": "constant",
+  // If the magnetisation is in plane rather than z
+  "in_plane_propagation": true,
+  "in_plane_angle": 0, // estimate of direction of the magnetisation in the plane
+  // add an epsilon value to the k-vectors to avoid some issues with 1/0
+  "use_k_vector_epsilon": false,
+  "k_vector_epsilon": 1e3,
+  // Use a hanning filter in the fourier space with high and low cutoffs.
+  "hanning_filter": true,
+   "use_hanning_high_cutoff": true,
+  "lambda_high_cutoff": 0.1e-6,
+  "use_hanning_low_cutoff": false,
+  "lambda_low_cutoff": 100e-6,
+
+
+    // ====== Region of interest params ======
+    // For taking a region of interest and ignoring the rest of the data set
+    "ROI": "Full", // option: Full, Rectangle, Square, Circle
+    "ROI_radius": 200, // radius of circle or half the size of the Square
+    "ROI_centre": [256, 256], // centre pixel
+    "ROI_rect_size": [100, 50], // Used for the rectangle size only
+    // Defines how the ROI is used. false = the region of interest is only used for plotting.
+    // true = region of interest is used for all fitting and plotting
+    "use_ROI_for_fit": false,
+
+    // ========== Plotting Parameters ==========
+    "make_plots": true,
+    "save_plots": true,
+    "show_plots": true,
+    "annotate_plots": true,
+    "dpi": 200,
+    "save_fig_type": "png"
+}
